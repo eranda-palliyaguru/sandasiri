@@ -9,13 +9,11 @@ $sys_invo=$row1['sys_invo'];
 $date=$row1['date'];
 
 
-$sql = "UPDATE INVOICE_DTL SET date='$date' WHERE sys_invo='$sys_invo' ";
-
-if ($db->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-
-  }
+$sql = "UPDATE INVOICE_DTL 
+SET date=?
+WHERE sys_invo=? "; 
+$q = $db->prepare($sql);
+$q->execute(array($date,$sys_invo));
 
 }
 
