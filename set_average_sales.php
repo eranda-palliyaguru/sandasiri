@@ -3,7 +3,7 @@ session_start();
 include('../connect.php');
 
 
-$stmt = $db->query("SELECT SUM(cost_price),SUM(ret_price),SUM(qty),COUNT(id),item_code FROM INVOICE_DTL WHERE date BETWEEN '2019-01-01' AND '2019-12-31' GROUP BY item_code ");
+$stmt = $db->query("SELECT SUM(cost_price),SUM(ret_price),SUM(qty),COUNT(id),item_code FROM INVOICE_DTL WHERE date BETWEEN '2019-01-01' AND '2019-01-31' GROUP BY item_code ");
 while ($row1 = $stmt->fetch()){
 $sys_id=$row1['item_code'];
 $tot=$row1['SUM(qty)'];
