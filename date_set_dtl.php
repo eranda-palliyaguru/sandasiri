@@ -3,7 +3,7 @@ session_start();
 include('../connect.php');
 
 
-$stmt = $db->query("SELECT date, sys_invo FROM sales WHERE date BETWEEN '2019-01-01' AND '2019-12-31' ");
+$stmt = $db->query("SELECT date, sys_invo FROM sales WHERE date = '2019-01-01'  ");
 while ($row1 = $stmt->fetch()){
 $sys_invo=$row1['sys_invo'];
 $date=$row1['date'];
