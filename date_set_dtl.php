@@ -24,7 +24,7 @@ $q = $db->prepare($sql);
 $q->execute(array($ch,$id));
 
 }
-sleep(3);
+
 
 header("location:date_set_dtl.php");
 
