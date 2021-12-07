@@ -10,6 +10,7 @@ while ($row2 = $item_sql->fetch()){
 $work_day=$row2['COUNT(id)'];
 
 }
+echo $work_day;
 
 $stmt = $db->query("SELECT SUM(bill_qty),SUM(qty),COUNT(id),code FROM day_avg WHERE date BETWEEN '$d1' AND '$d2' GROUP BY code ");
 while ($row1 = $stmt->fetch()){
