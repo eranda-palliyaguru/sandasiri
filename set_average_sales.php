@@ -50,4 +50,13 @@ if ($db->query($sql) === TRUE) {
 
 }
 
+
+$m=$m-1;
+if($m==0){$y=$y-1;$m=12}
+
+$m=str_pad($m,2,"0",STR_PAD_LEFT);
+
+$date1=$y."-".$m."-01";
+$date1=$y."-".$m."-31";
+header("location:set_average_sales.php?d1='$date1'&d2='$date2'");
 ?>
