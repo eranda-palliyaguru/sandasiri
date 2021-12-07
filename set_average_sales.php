@@ -2,28 +2,45 @@
 session_start();
 include('../connect.php');
 
+$d1=$_GET['d1'];
+$d2=$_GET['d2'];
 
-$stmt = $db->query("SELECT SUM(cost_price),SUM(ret_price),SUM(qty),COUNT(id),item_code FROM INVOICE_DTL WHERE date BETWEEN '2019-01-01' AND '2019-01-31' GROUP BY item_code ");
+$item_sql = $db->query("SELECT COUNT(id) FROM day_avg WHERE date BETWEEN '$d1' AND '$d2' GROUP BY date ");
+while ($row2 = $item_sql->fetch()){
+$work_day=$row2['COUNT(id)'];
+
+}
+
+$stmt = $db->query("SELECT SUM(bill_qty),SUM(qty),COUNT(id),code FROM day_avg WHERE date BETWEEN '$d1' AND '$d2' GROUP BY code ");
 while ($row1 = $stmt->fetch()){
-$sys_id=$row1['item_code'];
-$tot=$row1['SUM(qty)'];
+$code=$row1['code'];
+$qty=$row1['SUM(qty)'];
 $count=$row1['COUNT(id)'];
-$amount=$row1['SUM(ret_price)'];
-$cost=$row1['SUM(cost_price)'];
+$bill=$row1['SUM(bill_qty)'];
 
-$item_sql = $db->query("SELECT * FROM item WHERE sys_id='$sys_id' ");
+$item_sql = $db->query("SELECT * FROM item WHERE sys_id='$code' ");
 while ($row2 = $item_sql->fetch()){
 $name=$row2['name'];
-$code=$row2['code'];
+$code_v=$row2['code'];
 $item_id=$row2['id'];
 }
 
+
+
+    
 $date=date('Y-m-d');
-$available_day=cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+    
+$sp = explode("-",$d1);
+$y= $sp[0];
+$m=$sp[1];
+$month=$y."-".$m;    
+$available_day=cal_days_in_month(CAL_GREGORIAN, $m, $y);
 
 
 
-$sql = "INSERT INTO item_avg (name,code,sys_id,item_id,total_qty,average_qty,date,amount,cost_amount,bill_count,available_day) VALUES ('$name','$code','$sys_id','$item_id','$tot','$tot/$available_day','$date','$amount','$cost','$count','$available_day')";
+
+$sql = "INSERT INTO month_avg (name,code,view_code,item_id,qty,average_qty,bill,available_day,month,date_now,work_day) VALUES 
+('$name','$code','$code_v','$item_id','$qty','$qty/$work_day','$bill','$available_day','$month','$date','$work_day')";
 if ($db->query($sql) === TRUE) {
     echo "New record created successfully";
   } else {
