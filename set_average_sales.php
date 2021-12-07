@@ -52,7 +52,9 @@ if ($db->query($sql) === TRUE) {
 
 
 $m=$m-1;
-if($m==0){$y=$y-1;$m=12}
+if($m==0){$y=$y-1;$m=12;
+          };
+
 
 $m=str_pad($m,2,"0",STR_PAD_LEFT);
 
