@@ -7,7 +7,7 @@ $d2=$_GET['d2'];
 $work_day=0;
 $item_sql = $db->query("SELECT COUNT(id) FROM day_avg WHERE date BETWEEN '$d1' AND '$d2' GROUP BY date ");
 while ($row2 = $item_sql->fetch()){
-$work_day+=$work_day+1;
+$work_day+=1;
 
 }
 echo $work_day;
