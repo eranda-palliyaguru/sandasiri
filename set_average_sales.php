@@ -37,11 +37,11 @@ $m=$sp[1];
 $month=$y."-".$m;    
 $available_day=cal_days_in_month(CAL_GREGORIAN, $m, $y);
 
-
+$avg=$qty/$work_day;
 
 
 $sql = "INSERT INTO month_avg (name,code,view_code,item_id,qty,average_qty,bill,available_day,month,date_now,work_day) VALUES 
-('$name','$code','$code_v','$item_id','$qty','$qty/$work_day','$bill','$available_day','$month','$date','$work_day')";
+('$name','$code','$code_v','$item_id','$qty','$avg','$bill','$available_day','$month','$date','$work_day')";
 if ($db->query($sql) === TRUE) {
     echo "New record created successfully";
   } else {
