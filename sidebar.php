@@ -71,10 +71,10 @@
           <li class="nav-header">EXAMPLES</li>
 
           <li class="nav-item">
-            <a href="re_order_level.php" class="nav-link">
+            <a href="product.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Re-Order Level
+                PRODUT
               </p>
             </a>
           </li>
