@@ -27,7 +27,10 @@ $item_id=$row2['id'];
 }
 
 
-
+$item_sql = $db->query("SELECT COUNT(id) FROM day_avg WHERE code='$code' AND date BETWEEN '$d1' AND '$d2'  ");
+while ($row2 = $item_sql->fetch()){
+  $pf=$row1['COUNT(id)'];
+}
     
 $date=date('Y-m-d');
     
@@ -40,8 +43,8 @@ $available_day=cal_days_in_month(CAL_GREGORIAN, $m, $y);
 $avg=$qty/$work_day;
 
 
-$sql = "INSERT INTO month_avg (name,code,view_code,item_id,qty,average_qty,bill,available_day,month,date_now,work_day) VALUES 
-('$name','$code','$code_v','$item_id','$qty','$avg','$bill','$available_day','$month','$date','$work_day')";
+$sql = "INSERT INTO month_avg (name,code,view_code,item_id,qty,average_qty,bill,available_day,month,date_now,work_day,bill_day) VALUES 
+('$name','$code','$code_v','$item_id','$qty','$avg','$bill','$available_day','$month','$date','$work_day','$pf')";
 if ($db->query($sql) === TRUE) {
     echo "New record created successfully";
   } else {
