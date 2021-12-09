@@ -1,6 +1,6 @@
 
 <?php include("../connect.php"); ?>
-<?php include_once("../../auth.php"); ?>
+<?php include_once("../auth/auth.php"); ?>
 <?php
 //$uname=$_SESSION['SESS_MEMBER_ID'];
 //$result1 = $db->prepare("SELECT * FROM user WHERE id='$uname' ");
@@ -28,7 +28,7 @@
           <img src="user_pic/dhanushka.jpeg<?php  echo $upic1;?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> ADMIN <?php // echo $_SESSION['SESS_FIRST_NAME'];?> - <?php // echo $_SESSION['SESS_LAST_NAME'];?></a>
+          <a href="#" class="d-block">  <?php echo $_SESSION["name"];?> - <?php //  echo $_SESSION['SESS_LAST_NAME'];?></a>
 <form action="index.php" method="post" accept-charset="utf-8">
           <input type="hidden" name="action" value="logOut" />
           <button type="submit" class="btn btn-block btn-outline-primary">Log out</button>
