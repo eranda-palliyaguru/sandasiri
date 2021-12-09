@@ -21,7 +21,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <?php  include("hed.php"); ?>

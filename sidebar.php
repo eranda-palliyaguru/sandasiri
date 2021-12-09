@@ -29,7 +29,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block"> ADMIN <?php // echo $_SESSION['SESS_FIRST_NAME'];?> - <?php // echo $_SESSION['SESS_LAST_NAME'];?></a>
-<form action="../index.php" method="post" accept-charset="utf-8">
+<form action="index.php" method="post" accept-charset="utf-8">
           <input type="hidden" name="action" value="logOut" />
           <button type="submit" class="btn btn-block btn-outline-primary">Log out</button>
         </form>
@@ -55,7 +55,7 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="../../index.php" class="nav-link">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
