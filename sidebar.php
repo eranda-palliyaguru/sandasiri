@@ -1,6 +1,6 @@
 
 <?php include("../connect.php"); ?>
-<?php // include_once("../../auth.php"); ?>
+<?php include_once("../../auth.php"); ?>
 <?php
 //$uname=$_SESSION['SESS_MEMBER_ID'];
 //$result1 = $db->prepare("SELECT * FROM user WHERE id='$uname' ");
