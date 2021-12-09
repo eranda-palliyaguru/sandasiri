@@ -69,7 +69,7 @@
           <!-- BAR CHART -->
           <div class="card card-">
               <div class="card-header">
-                <h3 class="card-title">Number OF Bill Chart</h3>
+                <h3 class="card-title">Number OF Bill </h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -93,7 +93,7 @@
             <!-- LINE CHART -->
             <div class="card card-">
               <div class="card-header">
-                <h3 class="card-title">Quantity Chart</h3>
+                <h3 class="card-title">Quantity</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
