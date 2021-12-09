@@ -2,7 +2,7 @@
 <div class="preloader flex-column justify-content-center align-items-center">
   <img class="animation__shake" src="img/cloud arm.png" alt="CLOUD ARM"  width="220">
 </div>
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">

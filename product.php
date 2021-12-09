@@ -21,12 +21,34 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition dark-mode sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <?php  include("hed.php"); ?>
   <?php include("sidebar.php"); ?>
-  
+  <script>
+function showResult(str) {
+  if (str.length==0) {
+    document.getElementById("serch").innerHTML="";
+    document.getElementById("serch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("serch").innerHTML=this.responseText;
+      document.getElementById("serch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","product_sech.php?q="+str+"",true);
+  xmlhttp.send();
+}
+</script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -39,7 +61,7 @@
                 <div class="col-md-8 offset-md-2">
                     
                         <div class="input-group">
-                            <input type="search" class="form-control form-control-lg" placeholder="Type Product Name Or Code  here">
+                            <input onkeyup="showResult(this.value)" type="search" class="form-control form-control-lg" placeholder="Type Product Name Or Code  here">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-lg btn-default">
                                     <i class="fa fa-search"></i>
@@ -82,16 +104,16 @@
 
                     </thead>
 
-                  <tbody>
+                  <tbody id="serch">
                     <?php include('../connect.php');
                   date_default_timezone_set("Asia/Colombo");
 
 
-                    $stmt = $db->query("SELECT  * FROM item ORDER by id DESC ");
+                    $stmt = $db->query("SELECT  * FROM item ORDER by barcode DESC  LIMIT 100");
                     while ($row2 = $stmt->fetch()){
 
 ?>
-<tr>
+<tr >
                     <td><?php echo $row2['id'] ?></td>
                     <td><?php echo $row2['name'] ?></td>
                     <td><?php echo $row2['sys_id'] ?></td>
@@ -100,7 +122,7 @@
                     <td><?php echo $row2['max_qty'] ?></td>
                     <td><?php echo $row2['barcode'] ?></td>
                     <td></td>
-                    <td></td>
+                    <td><a href="product_profile.php?id=<?php  echo $row2['id']; ?>" class="btn btn-primary btn-sm">Profile</a></td>
                     
                     </tr>
 
@@ -197,6 +219,7 @@
 
 
 <script>
+
   $(function () {
 
     $("#example1").DataTable({
