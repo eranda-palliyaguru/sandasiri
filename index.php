@@ -166,7 +166,7 @@
           data                : [<?php 
           $s_date=date('Y')."-01";
           $e_date=date('Y')."-12";
-          $stmt = $db->query("SELECT  SUM(qty) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month DESC");
+          $stmt = $db->query("SELECT  SUM(qty) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month ASC");
                     while ($row2 = $stmt->fetch()){  echo $row2['SUM(qty)'].","; }?>]
         },
         {
@@ -181,7 +181,7 @@
           data                : [<?php 
           $s_date=$y."-01";
           $e_date=$y."-12";
-          $stmt = $db->query("SELECT  SUM(qty) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month DESC");
+          $stmt = $db->query("SELECT  SUM(qty) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month ASC");
                     while ($row2 = $stmt->fetch()){  echo $row2['SUM(qty)'].","; }?>]
         },
       ]
