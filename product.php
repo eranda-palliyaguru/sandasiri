@@ -27,55 +27,37 @@
   <?php  include("hed.php"); ?>
   <?php include("sidebar.php"); ?>
   
-  <style>
-th
-{
-  vertical-align: bottom;
-  text-align: center;
-}
-
-th span
-{
-  -ms-writing-mode: tb-rl;
-  -webkit-writing-mode: vertical-rl;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  white-space: nowrap;
-}
-</style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Sales Report</h1>
-          </div>
-
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
     <!-- Main content -->
     <section class="content">
+
+    <div class="container-fluid">
+            <h2 class="text-center display-4">Search</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    
+                        <div class="input-group">
+                            <input type="search" class="form-control form-control-lg" placeholder="Type Product Name Or Code  here">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-lg btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+<br>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Add You Filter</h3>
-              </div>
-              <!-- /.card-header -->
-             
-              <!-- /.card-body -->
-            </div>
+            
             <!-- /.card -->
 
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
-              </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped" data-show-fullscreen="true">
@@ -91,7 +73,7 @@ th span
               <th>Quantity</th>
               <th>Max Quantity</th>
               <th>Barcode</th>
-              <th>Action</th>
+              <th>Status</th>
               <th>#</th>
 
                     </tr>
@@ -218,7 +200,7 @@ th span
   $(function () {
 
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": true,"select": true,
+      "responsive": true, "lengthChange": false, "autoWidth": true,"select": true,"searching": false,
 
       dom: 'Bfrtip',
        buttons: [
@@ -234,7 +216,7 @@ th span
                        .css( 'font-size', 'inherit' );
                }
            }
-       ,'pdf','colvis']
+       ]
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 //--------------------------------------------------------------
@@ -243,7 +225,6 @@ th span
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
       "ordering": true,
       "info": true,
       "autoWidth": false,

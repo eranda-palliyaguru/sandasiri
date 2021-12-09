@@ -1,5 +1,5 @@
 
-<?php // include("../../connect.php"); ?>
+<?php include("../connect.php"); ?>
 <?php // include_once("../../auth.php"); ?>
 <?php
 //$uname=$_SESSION['SESS_MEMBER_ID'];
