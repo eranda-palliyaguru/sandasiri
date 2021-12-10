@@ -93,9 +93,9 @@ function showResult(str) {
               <th>Code</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Max Quantity</th>
-              <th>Barcode</th>
-              <th>Status</th>
+              <th>Idle</th>
+              <th>Re-Order</th>
+              <th>Sales Status</th>
               <th>#</th>
 
                     </tr>
@@ -119,9 +119,9 @@ function showResult(str) {
                     <td><?php echo $row2['sys_id'] ?></td>
                     <td><?php echo $row2['price'] ?></td>
                     <td><?php echo $row2['qty'] ?></td>
-                    <td><?php echo $row2['max_qty'] ?></td>
-                    <td><?php echo $row2['barcode'] ?></td>
-                    <td></td>
+                    <td><?php echo $row2['capacity'] ?></td>
+                    <td><?php echo round($row2['capacity'] - $row2['qty']); ?></td>
+                    <td><?php $type=$row2['capacity_type']; if($type==1){echo"Medium";} if($type==2){ if($row2['capacity']==0){echo"Bad";}else{echo"Low";} } ?></td>
                     <td><a href="product_profile.php?id=<?php  echo $row2['id']; ?>" class="btn btn-primary btn-sm">Profile</a></td>
                     
                     </tr>
