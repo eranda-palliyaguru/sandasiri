@@ -59,7 +59,7 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
-                <span class="right badge badge-danger">New</span>
+                
               </p>
             </a>
           </li>
@@ -72,18 +72,22 @@
 
           <li class="nav-item">
             <a href="product.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <i class="nav-icon fas fa-barcode"></i>
+             
               <p>
                 PRODUT
               </p>
             </a>
           </li>
 
-
-
-
-
-
+          <li class="nav-item">
+            <a href="order.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+              <p>
+                PRODUT ORDER
+              </p>
+            </a>
+          </li>
 
 
         </ul>
