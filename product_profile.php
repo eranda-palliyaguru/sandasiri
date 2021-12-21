@@ -58,8 +58,10 @@ $stmt = $db->query("SELECT  * FROM item WHERE id = '$id'  ");
                   <li class="list-group-item">
                     <b>PROFIT</b> <a class="float-right">Rs.<?php echo $row2['price']-$row2['o_price']; ?></a>
                   </li>
+                  <li class="list-group-item">
+                    <b>QUANTITY</b> <a class="float-right"><?php echo $row2['qty']; ?></a>
                 </ul>
-<?php $code=$row2['sys_id']; } ?>
+<?php $code=$row2['sys_id']; $group_id=$row2['main_group'];$sub_group_id=$row2['sub_group']; } ?>
                
              
               </div>
@@ -103,6 +105,16 @@ while ($row1 = $stmt->fetch()){
     $update=$row1['date'];    
 }
 
+$stmt = $db->query("SELECT  * FROM item_group WHERE code='$group_id'");
+while ($row1 = $stmt->fetch()){ 
+    $group=$row1['type'];    
+}
+
+$stmt = $db->query("SELECT  * FROM item_group WHERE code='$sub_group_id'");
+while ($row1 = $stmt->fetch()){ 
+    $sub_group=$row1['type'];    
+}
+
 $sql = "UPDATE item 
 SET capacity=?
 WHERE id=? "; 
@@ -115,7 +127,25 @@ $q->execute(array($tot_avg,$id));
                 <h3 class="card-title">PRODUCT DATA</h3>
               </div>
               <!-- /.card-header -->
+
+
               <div class="card-body">
+              <strong><i class="fas fa-cubes mr-1"></i>Main GROUP</strong>
+
+<p class="text-muted">
+<?php echo $group; ?>
+</p>
+
+<hr>
+
+<strong><i class="fas fa-cubes mr-1"></i>SUB GROUP</strong>
+
+<p class="text-muted">
+<?php echo $sub_group; ?>
+</p>
+
+<hr>
+
                 <strong><i class="fas fa-book mr-1"></i> Day Average</strong>
 
                 <p class="text-muted">
