@@ -16,7 +16,7 @@ if($group==''){ if($_SESSION['group']=='0'){ $group=''; }else{ $group=$_SESSION[
 <th>Name</th>
 <th>Code</th>
 <th>Quantity</th>
-<th>Idle</th>
+<th>Stock Level</th>
 <th>Re-Order</th>
 <th>Sales Status</th>
 <th>#</th>
