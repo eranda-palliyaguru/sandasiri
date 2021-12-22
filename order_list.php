@@ -35,8 +35,52 @@ function toggle(source) {
     checkboxes[i].checked = source.checked;
   }
 }
-</script>
+$(function() {
 
+$(".delbutton").click(function(){
+
+//Save the link in a variable called element
+
+var element = $(this);
+
+//Find the id of the link that was clicked
+
+var del_id = element.attr("id");
+
+//Built a url to send
+
+var info = 'id=' + del_id;
+
+if(confirm("Sure you want to delete this Order? There is NO undo!"))
+
+ {
+
+$.ajax({
+
+type: "GET",
+
+url: "sales_dll.php",
+
+data: info,
+
+success: function(){
+
+}
+
+});
+
+$(this).parents(".record").animate({ backgroundColor: "#fbc7c7" }, "fast")
+
+.animate({ opacity: "hide" }, "slow");
+
+}
+
+return false;
+
+});
+
+});
+</script>
   <script>
      
 function showResult(str) {
@@ -150,7 +194,7 @@ function showResult2(str) {
               <th>Order QTY</th>
               <th>Stock Level</th>
               <th>Decision</th>
-
+              <th>#</th>
                     </tr>
 
 
@@ -168,7 +212,7 @@ $id=$_GET['id'];
 
 
 ?>
-<tr >
+<tr class='record' >
                     <td><?php echo $row2['id'] ?></td>
                     <td><?php echo $row2['name'] ?></td>
                     <td><?php echo $row2['code'] ?></td>
@@ -176,7 +220,7 @@ $id=$_GET['id'];
                     <td><?php echo $row2['qty'] ?></td>
                     <td><?php echo $row2['stock_level'] ?></td>
                     <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
-                    
+                    <td> <a class="btn btn-danger btn-md delbutton" id="<?php echo $row2['id']; ?>" href="#"><i class="fas fa-trash-alt"></i></a> </td>
                     </tr>
 
                    <?php }
