@@ -38,14 +38,9 @@
             <h2 class="text-center display-4">PRODUCT ORDER</h2>
         </div>
 <br>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            
 
-
-  
-  
+      
+          <div class="col-12"> 
          <a href="order_list.php?id=<?php echo date('ymdhis'); ?>"> <input class="btn btn-success btn-md" type="submit" value="CREATE NEW ORDER" name="sub"></a>
             <!-- /.card -->
 
@@ -63,6 +58,7 @@
               <th>Code</th>
               <th>Date</th>
               <th>Type</th>
+              <th>#</th>
               </tr>
 
                     </thead>
@@ -80,8 +76,68 @@
                     <td><?php echo $row2['sup_name'] ?></td>
                     <td><?php echo $row2['sup_code'] ?></td>
                     <td><?php echo $row2['date'] ?></td>
-                    <td></td>
+                    <td><?PHP if($row2['action']==0){echo "<b style='color:#EACA00;'>Waiting for Approval</b>";} ?></td>
+                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<?php echo $row2['id'] ?>">
+                  VIew
+                </button></td>
                     
+                    </tr>
+      
+                   <?php }
+                  ?>
+                    
+                  
+                  </tbody>
+                  <tfoot>
+
+                  </tfoot>
+                </table>
+                <?php 
+                    $stmt = $db->query("SELECT  * FROM order_hed WHERE action < 10 ORDER by id DESC ");
+                    while ($row2 = $stmt->fetch()){
+
+?>
+                <div class="container-fluid">
+        <div class="row">
+
+          <div class="modal fade" id="modal-<?php echo $row2['id'] ?>">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><?php echo $row2['sup_name'] ?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table id="example2" class="table table-bordered table-striped" >
+                  <thead>
+
+
+              <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Stock QTY</th>
+              <th>Order QTY</th>
+              <th>Stock Level</th>
+              <th>Decision</th>
+                    </tr>
+                    </thead>
+                  <tbody >
+                    <?php $id=$row2['or_id'];
+                    $stmt2 = $db->query("SELECT  * FROM order_list WHERE order_id='$id' ORDER by id DESC ");
+                    while ($row = $stmt2->fetch()){
+                        $disi=$row['stock_level']-$row['stock_qty'];
+?>
+                    <tr class='record' >
+                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['name'] ?></td>
+                    <td><?php echo $row['code'] ?></td>
+                    <td><?php echo $row['stock_qty'] ?></td>
+                    <td><?php echo $row['qty'] ?></td>
+                    <td><?php echo $row['stock_level'] ?></td>
+                    <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
                     </tr>
 
                    <?php }
@@ -93,8 +149,19 @@
 
                   </tfoot>
                 </table>
-
-
+                <p> <b>Date:</b> <?php echo $row2['date'] ?></p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success">Approve</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+<?php } ?>
               </div>
               <!-- /.card-body -->
             </div>
@@ -178,23 +245,13 @@
 <script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 
 
+
 <script>
+  $(function() {
 
-  $(function () {
-      
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": true,"select": true,"searching": true,"paging": true,
 
-      dom: 'Bfrtip',
-        buttons: [
-            
-        ]
-       
 
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-//--------------------------------------------------------------
-
-//-------------------------------------------------
+      //-------------------------------------------------
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -222,15 +279,158 @@
      } );
 
 
+     //-------------------------------------------------
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
 
-  $('.select2').select2();
-  $('.select2bs4').select2({
-     theme: 'bootstrap4'
-   })
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        icon: 'success',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultInfo').click(function() {
+      Toast.fire({
+        icon: 'info',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultError').click(function() {
+      Toast.fire({
+        icon: 'error',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultWarning').click(function() {
+      Toast.fire({
+        icon: 'warning',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultQuestion').click(function() {
+      Toast.fire({
+        icon: 'question',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+
+    $('.toastrDefaultSuccess').click(function() {
+      toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultInfo').click(function() {
+      toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultError').click(function() {
+      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultWarning').click(function() {
+      toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+
+    $('.toastsDefaultDefault').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultTopLeft').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'topLeft',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultBottomRight').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'bottomRight',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultBottomLeft').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'bottomLeft',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultAutohide').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        autohide: true,
+        delay: 750,
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultNotFixed').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        fixed: false,
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultFull').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        icon: 'fas fa-envelope fa-lg',
+      })
+    });
+    $('.toastsDefaultFullImage').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        image: '../../dist/img/user3-128x128.jpg',
+        imageAlt: 'User Picture',
+      })
+    });
+    $('.toastsDefaultSuccess').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-success',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultInfo').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-info',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultWarning').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-warning',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultDanger').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-danger',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultMaroon').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-maroon',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
   });
-  $(document).ready(function(){
-
-  })
 </script>
 <script src="jquery.tableTotal.js"></script>
 </body>
