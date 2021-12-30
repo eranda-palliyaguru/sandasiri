@@ -2,21 +2,21 @@
 <?php include("../connect.php"); ?>
 <?php include_once("../auth/auth.php"); ?>
 <?php
-//$uname=$_SESSION['SESS_MEMBER_ID'];
-//$result1 = $db->prepare("SELECT * FROM user WHERE id='$uname' ");
-//$result1->bindParam(':userid', $res);
-//$result1->execute();
-//for($i=0; $row1 = $result1->fetch(); $i++){
-//$upic1=$row1['upic'];
-//}
-//
+$uname=$_SESSION['USER_ID'];
+$result1 = $db->prepare("SELECT * FROM user WHERE id=:userid ");
+$result1->bindParam(':userid', $uname);
+$result1->execute();
+for($i=0; $row1 = $result1->fetch(); $i++){
+$upic1=$row1['u_pic'];
+}
+
 ?>
  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-image: url('img/ez2.gif');background-repeat: no-repeat;   background-attachment: fixed; background-size: 800px; ">
       
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
-      <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="../dist/img/AdminLTELogo.png" alt="CLOUD ARM" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CLOUD arm</span>
     </a>
 
@@ -25,10 +25,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="user_pic/dhanushka.jpeg<?php  echo $upic1;?>" class="img-circle elevation-2" alt="User Image">
+          <img src="user_pic/<?php  echo $upic1;?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">  <?php echo $_SESSION["name"];?> - <?php //  echo $_SESSION['SESS_LAST_NAME'];?></a>
+          <a href="#" class="d-block"> <h4><?php echo $_SESSION["name"];?> - <?php   echo $_SESSION['POSITION'];?></h4> </a>
           <form action="../auth/logout.php" method="post" accept-charset="utf-8">
           <input type="hidden" name="action" value="logOut" />
           <button type="submit" class="btn btn-block btn-outline-primary">Log out</button>
