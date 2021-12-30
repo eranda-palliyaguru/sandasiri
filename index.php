@@ -33,7 +33,7 @@
 
   <!-- Preloader -->
 
-<?php include("hed.php"); ?>
+<?php // include("hed.php"); ?>
 <?php include("sidebar.php"); ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -58,6 +58,124 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+      <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-chart-line"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">TOTAL SALES</span>
+                <span class="info-box-number">Rs.41,410</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">TOTAL SALES</span>
+                <span class="info-box-number">Rs.41,410</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">TOTAL SALES</span>
+                <span class="info-box-number">Rs.41,410</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">TOTAL SALES</span>
+                <span class="info-box-number">Rs.41,410</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+
+          </div>
+          <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Latest Orders</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>Invoice NO.</th>
+                      <th>DATE</th>
+                      <th>AMOUNT</th>
+                      <th>COST</th>
+                      <th>DISCOUNT</th>
+                      <th>PROFIT</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $y=date('Y');
+                        $m=date('m')-12;
+                        if($m<1){
+                            $m=12+$m;
+                            $y=$y-1;
+                        }
+                        $m=str_pad($m,2,"0",STR_PAD_LEFT);
+                        $date=$y.'-'.$m."-01";
+                        $date2=date('Y-m-d');
+
+                        $stmt = $db->query("SELECT  * FROM sales WHERE amount > '100000' AND date BETWEEN '$date' AND '$date2' ORDER BY amount DESC LIMIT 10");
+                                  while ($row2 = $stmt->fetch()){  
+                        ?>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html"><?php echo $row2['sys_invo'] ?></a></td>
+                      <td><?php echo $row2['date'] ?></td>
+                      <td>Rs.<?php echo $row2['amount'] ?></td>
+                      <td>Rs.<?php echo $row2['cost_total'] ?></td>
+                      <td>Rs.<?php echo $row2['dis'] ?></td>
+                      <td>Rs.<?php echo $row2['amount']-$row2['cost_total'] ?></td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left"><?php echo $date; ?></a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
         <div class="row">
           <div class="col-md-6">
             
