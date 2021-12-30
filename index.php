@@ -33,7 +33,7 @@
 
   <!-- Preloader -->
 
-<?php // include("hed.php"); ?>
+<?php include("hed.php"); ?>
 <?php include("sidebar.php"); ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -60,13 +60,21 @@
       <div class="container-fluid">
 
       <div class="row">
+        <?php $date = date('Y-m-d');
+        $stmt = $db->query("SELECT  sum(amount), sum(cost_total), count(id) FROM sales WHERE date='$date'  ORDER BY id DESC ");
+        while ($row2 = $stmt->fetch()){ 
+          $sales=$row2['sum(amount)'];
+          $cost=$row2['sum(cost_total)'];
+          $count=$row2['count(id)'];
+        } 
+        ?>
       <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-chart-line"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">TOTAL SALES</span>
-                <span class="info-box-number">Rs.41,410</span>
+                <span class="info-box-number">Rs.<?php echo $sales ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -75,11 +83,11 @@
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-coins"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">TOTAL SALES</span>
-                <span class="info-box-number">Rs.41,410</span>
+                <span class="info-box-text">PROFIT</span>
+                <span class="info-box-number">Rs.<?php echo $sales-$cost; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -88,11 +96,11 @@
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-alt"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">TOTAL SALES</span>
-                <span class="info-box-number">Rs.41,410</span>
+                <span class="info-box-text">BILL COUNT</span>
+                <span class="info-box-number">Rs.<?php echo $count; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -101,11 +109,12 @@
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cloud-upload-alt"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">TOTAL SALES</span>
-                <span class="info-box-number">Rs.41,410</span>
+                <span class="info-box-text">LAST UPDATE</span>
+                <span class="info-box-number"><?php $stmt = $db->query("SELECT  * FROM sales  ORDER BY id DESC LIMIT 1");
+                                  while ($row2 = $stmt->fetch()){ echo $row2['date'];} ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -115,7 +124,7 @@
           </div>
           <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title">Latest Orders</h3>
+                <h3 class="card-title">TOP 10 SALES</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -171,8 +180,6 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left"><?php echo $date; ?></a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
               </div>
               <!-- /.card-footer -->
             </div>
