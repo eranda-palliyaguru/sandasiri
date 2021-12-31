@@ -247,7 +247,7 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-<?php } ?> </div></div>
+<?php } ?> </div></div></div>
                 </div>
                 <!-- /.table-responsive -->
               </div>
