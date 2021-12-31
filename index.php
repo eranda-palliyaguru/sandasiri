@@ -177,8 +177,72 @@
                     </tr>
                     <?php } ?>
                     </tbody>
-                  </table>
-                  <?php 
+                  </table> 
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <?php } ?>
+        <div class="row">
+          <div class="col-md-6">
+            
+            
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-12">
+
+          <!-- BAR CHART -->
+          <div class="card card-">
+              <div class="card-header">
+                <h3 class="card-title">Number OF Bill </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+            <!-- LINE CHART -->
+            <div class="card card-">
+              <div class="card-header">
+                <h3 class="card-title">Quantity</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            
+            <?php 
                     $stmt = $db->query("SELECT  * FROM sales WHERE amount > '100000' AND date BETWEEN '$date' AND '$date2' ORDER BY amount DESC LIMIT 10");
                     while ($row2 = $stmt->fetch()){
 
@@ -247,71 +311,9 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-<?php } ?> 
-                </div>
-                <!-- /.table-responsive -->
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-              </div>
-              <!-- /.card-footer -->
-            </div>
-            <?php } ?>
-        <div class="row">
-          <div class="col-md-6">
-            
-            
-          </div>
-          <!-- /.col (LEFT) -->
-          <div class="col-md-12">
-
-          <!-- BAR CHART -->
-          <div class="card card-">
-              <div class="card-header">
-                <h3 class="card-title">Number OF Bill </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+<?php } ?>
 
 
-            <!-- LINE CHART -->
-            <div class="card card-">
-              <div class="card-header">
-                <h3 class="card-title">Quantity</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-             
           </div>
           <!-- /.col (RIGHT) -->
         </div>
