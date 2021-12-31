@@ -34,10 +34,7 @@
   <!-- Preloader -->
 
 <?php  include("hed.php");  ?>
-<?php include("sidebar.php");
-if($_SESSION['POSITION']=='user'){
-  header("location:product.php"); }
-?>
+<?php include("sidebar.php"); ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -50,7 +47,7 @@ if($_SESSION['POSITION']=='user'){
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard </li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -61,7 +58,7 @@ if($_SESSION['POSITION']=='user'){
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-
+<?php if($_SESSION['POSITION']=='admin'){ ?>
       <div class="row">
         <?php $date = date('Y-m-d');
         $stmt = $db->query("SELECT  sum(amount), sum(cost_total), count(id) FROM sales WHERE date='$date'  ORDER BY id DESC ");
@@ -69,9 +66,9 @@ if($_SESSION['POSITION']=='user'){
           $sales=$row2['sum(amount)'];
           $cost=$row2['sum(cost_total)'];
           $count=$row2['count(id)'];
-        } 
-        ?>
-      <div class="col-12 col-sm-6 col-md-3">
+          } 
+          ?>
+          <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-chart-line"></i></span>
 
@@ -124,7 +121,7 @@ if($_SESSION['POSITION']=='user'){
             <!-- /.info-box -->
           </div>
 
-          </div>
+      </div>
           <div class="card">
               <div class="card-header border-transparent">
                 <h3 class="card-title">TOP 10 SALES</h3>
@@ -186,6 +183,7 @@ if($_SESSION['POSITION']=='user'){
               </div>
               <!-- /.card-footer -->
             </div>
+            <?php } ?>
         <div class="row">
           <div class="col-md-6">
             
@@ -240,7 +238,7 @@ if($_SESSION['POSITION']=='user'){
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-
+             
           </div>
           <!-- /.col (RIGHT) -->
         </div>
@@ -367,7 +365,7 @@ if($_SESSION['POSITION']=='user'){
           data                : [<?php 
           $s_date=date('Y')."-01";
           $e_date=date('Y')."-12";
-          $stmt = $db->query("SELECT  SUM(bill) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month DESC");
+          $stmt = $db->query("SELECT  SUM(bill) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month ASC");
                     while ($row2 = $stmt->fetch()){  echo $row2['SUM(bill)'].","; }?>]
         },
         {
@@ -382,7 +380,7 @@ if($_SESSION['POSITION']=='user'){
           data                : [<?php 
           $s_date=$y."-01";
           $e_date=$y."-12";
-          $stmt = $db->query("SELECT  SUM(bill) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month DESC");
+          $stmt = $db->query("SELECT  SUM(bill) FROM month_avg WHERE month BETWEEN '$s_date' AND '$e_date' GROUP BY month ORDER BY month ASC");
                     while ($row2 = $stmt->fetch()){  echo $row2['SUM(bill)'].","; }?>]
         },
       ]

@@ -76,7 +76,7 @@
                     <td><?php echo $row2['sup_name'] ?></td>
                     <td><?php echo $row2['sup_code'] ?></td>
                     <td><?php echo $row2['date'] ?></td>
-                    <td><?PHP if($row2['action']==0){echo "<b style='color:#EACA00;'>Waiting for Approval</b>";} ?></td>
+                    <td><?PHP if($row2['action']==0){echo "<b style='color:#EACA00;'>Waiting for Approval</b>";} if($row2['action']==1){echo "<b style='color:#2ECC71;'>Approve</b>";} ?></td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<?php echo $row2['id'] ?>">
                   VIew
                 </button></td>
@@ -129,6 +129,7 @@
                     $stmt2 = $db->query("SELECT  * FROM order_list WHERE order_id='$id' ORDER by id DESC ");
                     while ($row = $stmt2->fetch()){
                         $disi=$row['stock_level']-$row['stock_qty'];
+                        $id=$row['id'];
 ?>
                     <tr class='record' >
                     <td><?php echo $row['id'] ?></td>
@@ -149,11 +150,12 @@
 
                   </tfoot>
                 </table>
-                <p> <b>Date:</b> <?php echo $row2['date'] ?></p>
+                <p> <b>Date:</b> <?php echo $row2['date']; $action=$row2['action']; ?></p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-success">Approve</button>
+              <?php $pos=$_SESSION['POSITION']; if($pos=='admin'){  if($action=='0'){?>
+              <a href="order_approve.php?id=<?php echo $id; ?>"><button type="button" class="btn btn-success">Approve</button></a> <?php } } ?>
             </div>
           </div>
           <!-- /.modal-content -->
