@@ -126,7 +126,7 @@
                     </thead>
                   <tbody >
                     <?php $id=$row2['or_id'];
-                    $stmt2 = $db->query("SELECT  * FROM order_list WHERE order_id='$id' ORDER by id DESC ");
+                    $stmt2 = $db->query("SELECT  * FROM order_list WHERE order_id='$id' AND action < '5' ORDER by id DESC ");
                     while ($row = $stmt2->fetch()){
                         $disi=$row['stock_level']-$row['stock_qty'];
                         $id=$row['id'];
@@ -139,6 +139,8 @@
                     <td><?php echo $row['qty'] ?></td>
                     <td><?php echo $row['stock_level'] ?></td>
                     <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
+                    <td><?php if( $row['action'] == 0){ ?><a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row2['id']; ?>&ord=<?php echo $id; ?>"><i class="fas fa-trash-alt"></i></a>
+                    <?php } ?> </td>
                     </tr>
 
                    <?php }

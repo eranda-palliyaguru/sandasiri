@@ -206,7 +206,7 @@ function showResult2(str) {
                   date_default_timezone_set("Asia/Colombo");
 
 $id=$_GET['id'];
-                    $stmt = $db->query("SELECT  * FROM order_list WHERE order_id='$id' ORDER by id DESC ");
+                    $stmt = $db->query("SELECT  * FROM order_list WHERE order_id='$id' AND action < '5' ORDER by id DESC ");
                     while ($row2 = $stmt->fetch()){
                         $disi=$row2['stock_level']-$row2['stock_qty'];
 
@@ -220,13 +220,11 @@ $id=$_GET['id'];
                     <td><?php echo $row2['qty'] ?></td>
                     <td><?php echo $row2['stock_level'] ?></td>
                     <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
-                    <td> <a class="btn btn-danger btn-md delbutton" id="<?php echo $row2['id']; ?>" href="#"><i class="fas fa-trash-alt"></i></a> </td>
+                    <td> <a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row2['id']; ?>&ord=<?php echo $id; ?>"><i class="fas fa-trash-alt"></i></a> </td>
                     </tr>
 
                    <?php }
-                  ?>
-                    
-                  
+                  ?>                    
                   </tbody>
                   <tfoot>
 
