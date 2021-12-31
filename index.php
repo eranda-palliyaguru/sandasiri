@@ -147,6 +147,7 @@
                       <th>COST</th>
                       <th>DISCOUNT</th>
                       <th>PROFIT</th>
+                      <th>#</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -165,16 +166,88 @@
                                   while ($row2 = $stmt->fetch()){  
                         ?>
                     <tr>
-                      <td><a href="pages/examples/invoice.html"><?php echo $row2['sys_invo'] ?></a></td>
+                      <td><?php echo $row2['id'] ?></td>
                       <td><?php echo $row2['date'] ?></td>
                       <td>Rs.<?php echo $row2['amount'] ?></td>
                       <td>Rs.<?php echo $row2['cost_total'] ?></td>
                       <td>Rs.<?php echo $row2['dis'] ?></td>
                       <td>Rs.<?php echo $row2['amount']-$row2['cost_total'] ?></td>
+                      <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<?php echo $row2['id'] ?>">
+                      VIew</button></td>
                     </tr>
                     <?php } ?>
                     </tbody>
                   </table>
+                  <?php 
+                    $stmt = $db->query("SELECT  * FROM sales WHERE amount > '100000' AND date BETWEEN '$date' AND '$date2' ORDER BY amount DESC LIMIT 10");
+                    while ($row2 = $stmt->fetch()){
+
+?>
+                <div class="container-fluid">
+        <div class="row">
+
+          <div class="modal fade" id="modal-<?php echo $row2['id'] ?>">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">INVOICE NO:-<?php echo $row2['sys_invo'] ?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table id="example2" class="table table-bordered table-striped" >
+                  <thead>
+
+
+              <tr>             
+              <th>Name</th>
+              <th>QTY</th>
+              <th>COST</th>
+              <th>AMOUNT</th>
+              <th>PROFIT</th>
+                    </tr>
+                    </thead>
+                  <tbody >
+                    <?php $id=$row2['invo_no'];
+                    $stmt2 = $db->query("SELECT  * FROM INVOICE_DTL WHERE sys_invo='$id' ");
+                    while ($row = $stmt2->fetch()){ $item=$row['item_code'];
+                         ?>
+                    <tr >
+                    
+                    <td><?php $stmtr = $db->query("SELECT  name FROM item WHERE sys_id='$item' ");
+                    while ($row3 = $stmtr->fetch()){ echo $row3['name']; }?></td>
+                    <td><?php echo $row['qty'] ?></td>
+                    <td>Rs.<?php echo $row['cost_price'] ?></td>
+                    <td>Rs.<?php echo $row['amount'] ?></td>
+                    <td>Rs.<?php echo $row['amount']-$row['cost_price'] ?></td>                   
+                    </tr>
+
+                   <?php }
+                  ?>
+                    
+                  
+                  </tbody>
+                  <tfoot>
+
+                  </tfoot>
+                </table>
+                <p> <b class="text-info">Date:</b> <?php echo $row2['date'];?> <br>
+                    <b class="text-info">Total Amount:</b> Rs.<?php echo $row2['amount'];?> <br>
+                    <b class="text-info">Total Cost:</b> Rs.<?php echo $row2['cost_total'];?> <br>
+                    <b class="text-info">Total Profit:</b>  Rs.<?php echo $row2['amount']-$row2['cost_total'];?> <br></p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+<?php } ?> </div></div>
                 </div>
                 <!-- /.table-responsive -->
               </div>
