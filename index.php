@@ -100,7 +100,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">BILL COUNT</span>
-                <span class="info-box-number">Rs.<?php echo $count; ?></span>
+                <span class="info-box-number"><?php echo $count; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
