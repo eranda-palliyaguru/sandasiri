@@ -4,6 +4,7 @@ include('../connect.php');
  
 $id=$_GET['id'];
 $ord=$_GET['ord'];
+$dip=$_GET['dip'];
 
 $sql = "UPDATE order_list 
         SET action='5'
@@ -11,5 +12,5 @@ $sql = "UPDATE order_list
 $q = $db->prepare($sql);
 $q->execute(array($id));
 
-header("location:order_list.php?id=$ord");
+header("location:$dip?id=$ord");
 ?>

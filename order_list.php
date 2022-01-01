@@ -220,8 +220,8 @@ $id=$_GET['id'];
                     <td><?php echo $row2['qty'] ?></td>
                     <td><?php echo $row2['stock_level'] ?></td>
                     <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
-                    <td> <a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row2['id']; ?>&ord=<?php echo $id; ?>"><i class="fas fa-trash-alt"></i></a> </td>
-                    </tr>
+                    <td> <a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row2['id']; ?>&ord=<?php echo $id; ?>&dip=order_list.php"><i class="fas fa-trash-alt"></i></a> </td>
+                    </tr> 
 
                    <?php }
                   ?>                    

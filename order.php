@@ -139,7 +139,7 @@
                     <td><?php echo $row['qty'] ?></td>
                     <td><?php echo $row['stock_level'] ?></td>
                     <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
-                    <td><?php if( $row['action'] == 0){ ?><a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row2['id']; ?>&ord=<?php echo $id; ?>"><i class="fas fa-trash-alt"></i></a>
+                    <td><?php if( $row['action'] == 0){ ?><a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row['id']; ?>&ord=<?php echo $id; ?>&dip=order.php"><i class="fas fa-trash-alt"></i></a>
                     <?php } ?> </td>
                     </tr>
 
@@ -157,7 +157,7 @@
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <?php $pos=$_SESSION['POSITION']; if($pos=='admin'){  if($action=='0'){?>
-              <a href="order_approve.php?id=<?php echo $id; ?>"><button type="button" class="btn btn-success">Approve</button></a> <?php } } ?>
+              <a href="order_approve.php?id=<?php echo $row2['id']; ?>"><button type="button" class="btn btn-success">Approve</button></a> <?php } } ?>
             </div>
           </div>
           <!-- /.modal-content -->
