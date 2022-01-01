@@ -16,7 +16,7 @@ $upic1=$row1['u_pic'];
       
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
-      <img src="../dist/img/AdminLTELogo.png" alt="CLOUD ARM" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="img/Asset 67 (2).png" alt="CLOUD ARM" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CLOUD ARM</span>
     </a>
 
@@ -35,7 +35,7 @@ $upic1=$row1['u_pic'];
         </form>
         </div>
       </div>
-
+      
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">

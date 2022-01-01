@@ -12,7 +12,21 @@
         <a href="index.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="#" class="nav-link">Local Server  
+        <?php include("../connect.php");
+        $stmt = $db->query("SELECT  * FROM api_server ");
+        while ($row2 = $stmt->fetch()){ $time=$row2['time']; } 
+        $time_now = date("ymdhis"); $time=$time_now-$time;
+        if($time < 40){ ?>  
+
+        <i class="fa fa-cloud-upload-alt text-success"></i>
+
+      <?php }else{ ?>
+
+        <i class="fa fa-times text-danger"></i>
+
+        <?php } ?>
+      </a> 
       </li>
     </ul>
 
