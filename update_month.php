@@ -4,7 +4,7 @@ include('../connect.php');
 
 
 
-$item_sql = $db->query("SELECT code, id FROM month_avg WHERE month ='2022-01'  GROUP BY  id  HAVING COUNT(id) > '0'");
+$item_sql = $db->query("SELECT code, id FROM month_avg WHERE month ='2022-01'  GROUP BY  id  HAVING COUNT(id) > '0' LIMIT 100");
 while ($row2 = $item_sql->fetch()){
 $code=$row2['code'];
 $id=$row2['id'];
