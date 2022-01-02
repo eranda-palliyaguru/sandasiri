@@ -22,10 +22,10 @@ $item = $db->query("SELECT * FROM month_avg WHERE code='$code' AND month='2022-0
 while ($row = $item->fetch()){
 $avgid=$row['id'];
 
-//$sql = "DELETE FROM month_avg 
-//WHERE id=? "; 
-//$q = $db->prepare($sql);
-//$q->execute(array($avgid));
+$sql = "DELETE FROM month_avg 
+WHERE id=? "; 
+$q = $db->prepare($sql);
+$q->execute(array($avgid));
 echo $row['id'].'<br>';
 
 }
