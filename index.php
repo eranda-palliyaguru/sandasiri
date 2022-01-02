@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CLOUD ARM</title>
-
+  <link rel="icon" href="img/Asset 67 (2).png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -122,6 +122,52 @@
           </div>
 
       </div>
+
+    <div class=" col-md-6">
+      <div class="card">
+              <div class="card-header border-0">
+                <h3 class="card-title">Best Sales Person</h3>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-sm">
+                    <i class="fas fa-download"></i>
+                  </a>
+                  <a href="#" class="btn btn-tool btn-sm">
+                    <i class="fas fa-bars"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Bill</th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php $date=date('Y-m').'-01'; $date2=date('Y-m').'-31';
+                  $stmt = $db->query("SELECT  SUM(amount), person, COUNT(amount) FROM sales WHERE date BETWEEN '$date' AND '$date2' GROUP BY person ORDER BY SUM(amount) DESC LIMIT 5");
+                  while ($row2 = $stmt->fetch()){ $em_code=$row2['person'];?>
+                  <tr>
+                    <td>
+                      <img src="user_pic/hemantha.jpeg" alt="Product 1" class="img-circle img-size-32 mr-2">
+                      <?php $slp= $db->query("SELECT name FROM employee WHERE code='$em_code'");
+                      while($row = $slp->fetch()){ echo $row['name']; } ?>
+                    </td>
+                    <td>Rs.<?php echo $row2['SUM(amount)'] ?></td>
+                    <td>                     
+                    <?php echo $row2['COUNT(amount)'] ?>
+                    </td>                   
+                  </tr>
+                  <?php } ?>                                        
+                  </tbody>
+                </table>
+              </div>
+            </div>
+    </div>
+
           <div class="card">
               <div class="card-header border-transparent">
                 <h3 class="card-title">TOP 10 SALES</h3>
@@ -246,7 +292,7 @@
                     $stmt = $db->query("SELECT  * FROM sales WHERE amount > '100000' AND date BETWEEN '$date' AND '$date2' ORDER BY amount DESC LIMIT 10");
                     while ($row2 = $stmt->fetch()){
 
-?>
+                  ?>
                 <div class="container-fluid">
         <div class="row">
 

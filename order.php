@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ORDER</title>
-
+  <link rel="icon" href="img/Asset 67 (2).png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -55,7 +55,7 @@
               <tr>
               <th>id</th>
               <th>Supplier Name</th>
-              <th>Code</th>
+              <th>Note</th>
               <th>Date</th>
               <th>Type</th>
               <th>#</th>
@@ -74,7 +74,7 @@
 <tr >
                     <td><?php echo $row2['id'] ?></td>
                     <td><?php echo $row2['sup_name'] ?></td>
-                    <td><?php echo $row2['sup_code'] ?></td>
+                    <td><?php echo $row2['note'] ?></td>
                     <td><?php echo $row2['date'] ?></td>
                     <td><?PHP if($row2['action']==0){echo "<b style='color:#EACA00;'>Waiting for Approval</b>";} if($row2['action']==1){echo "<b style='color:#2ECC71;'>Approve</b>";} ?></td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<?php echo $row2['id'] ?>">
