@@ -10,15 +10,15 @@ $code=$row2['code'];
 $id=$row2['id'];
 
 
-$item = $db->query("SELECT * FROM month_avg WHERE code='$code' AND month='2022-01' ORDER BY id DESC LIMIT 1,100 ");
+$item = $db->query("SELECT id, code FROM month_avg WHERE code='$code' AND month='2022-01' ORDER BY id DESC LIMIT 1,100 ");
 while ($row = $item->fetch()){
 $avgid=$row['id'];
 
-//$sql = "DELETE FROM month_avg 
-//WHERE id=? "; 
-//$q = $db->prepare($sql);
-//$q->execute(array($avgid));
-echo $row['id'].'<br>';
+$sql = "DELETE FROM month_avg 
+WHERE id=? "; 
+$q = $db->prepare($sql);
+$q->execute(array($avgid));
+echo $row['code'].'<br>';
 
 }
 }
