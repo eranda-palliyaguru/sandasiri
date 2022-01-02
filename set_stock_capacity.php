@@ -70,5 +70,5 @@ echo "QTY:".$qty."___CAP:".$capacity."__SUM:".$count."<br>";
 
 
 
-header("location:set_stock_capacity.php");
+//header("location:set_stock_capacity.php");
 ?>
