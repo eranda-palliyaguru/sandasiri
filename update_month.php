@@ -4,13 +4,13 @@ include('../connect.php');
 
 
 
-$item_sql = $db->query("SELECT code, id FROM month_avg WHERE month ='2022-01'  GROUP BY  code  HAVING COUNT(id) > 1 LIMIT 100");
+$item_sql = $db->query("SELECT code, id FROM month_avg WHERE month ='2021-12'  GROUP BY  code  HAVING COUNT(id) > 1 LIMIT 100");
 while ($row2 = $item_sql->fetch()){
 $code=$row2['code'];
 $id=$row2['id'];
 
 
-$item = $db->query("SELECT id, code FROM month_avg WHERE code='$code' AND month='2022-01' ORDER BY id DESC LIMIT 1,100 ");
+$item = $db->query("SELECT id, code FROM month_avg WHERE code='$code' AND month='2021-12' ORDER BY id DESC LIMIT 1,100 ");
 while ($row = $item->fetch()){
 $avgid=$row['id'];
 
