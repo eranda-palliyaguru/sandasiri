@@ -12,7 +12,7 @@ $m=str_pad($m,2,"0",STR_PAD_LEFT);
 $date=$y.'-'.$m;
 
 
-$item_sql = $db->query("SELECT sys_id,id FROM item WHERE last_update ='2022-01-02' ORDER by id DESC limit 10 ");
+$item_sql = $db->query("SELECT sys_id,id FROM item WHERE last_update ='2022-01-02' ORDER by id DESC limit 1000 ");
 while ($row2 = $item_sql->fetch()){
 $code=$row2['sys_id'];
 $id=$row2['id'];
