@@ -192,26 +192,64 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer bg-transparent">
+
+              <?php $month=date('Y-m');
+              $y=date('Y');$m=date('m');
+              $available_day=cal_days_in_month(CAL_GREGORIAN, $m, $y);
+
+              $stmt = $db->query("SELECT  amount FROM month_target WHERE month= '$month'");
+              while ($row1 = $stmt->fetch()){ $target=$row1['amount'];} 
+
+              $date1=date('Y-m').'-01';
+              $date2=date('Y-m-d');
+
+              $stmt = $db->query("SELECT  SUM(amount) FROM month_avg  WHERE month='$month'");
+              while ($row1 = $stmt->fetch()){ $ach=$row1['SUM(amount)'];}
+
+                      $sday= strtotime( $date1);
+                      $nday= strtotime($date2);
+                      $tdf= abs($nday-$sday);
+                      $nbday1= $tdf/86400;
+                      $s_date= intval($nbday1)+1;
+
+              $available_day1=$available_day/100;
+              $day_cap=$s_date/$available_day1;
+              $day_cap=round($day_cap,0); // day %
+
+              $target1=$target/100;
+              $ach_cap=$ach/$target1;
+              $ach_cap=round($ach_cap,0); // target %
+
+              $day_tag=$target/$available_day;
+              $cur_tag=$day_tag*$s_date;
+              $cur_tag1=$cur_tag/100;
+              $cur_cap=$ach/$cur_tag1;
+              $cur_cap=round($cur_cap,0); // current %
+              ?>
+
+
                 <div class="row">
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                    
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $ach_cap ?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
 
-                    <div class="text-white">Mail-Orders</div>
+                    <div class="text-white">Target Achievement <?php echo $ach_cap ?>%</div>
+                    
                   </div>
                   <!-- ./col -->
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $cur_cap ?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
 
-                    <div class="text-white">Online</div>
+                    <div class="text-white">Current Achievement <?php echo $cur_cap ?>%</div>
                   </div>
                   <!-- ./col -->
                   <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $day_cap ?>" data-width="60" data-height="60"
                            data-fgColor="#39CCCC">
 
-                    <div class="text-white">In-Store</div>
+                    <div class="text-white">Working Days <?php echo $day_cap; ?>%</div>
                   </div>
                   <!-- ./col -->
                 </div>
@@ -456,7 +494,7 @@
                     while ($row2 = $stmt->fetch()){  echo "'".$row2['month']."',"; }?>],
     datasets: [
       {
-        label: 'Digital Goods',
+        label: 'Sales Value',
         fill: false,
         borderWidth: 2,
         lineTension: 0,
