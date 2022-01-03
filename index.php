@@ -123,7 +123,9 @@
 
       </div>
 
-    <div class=" col-md-6">
+
+  <div class="row">
+    <div class=" col-md-5">
       <div class="card">
               <div class="card-header border-0">
                 <h3 class="card-title">Best Sales Person</h3>
@@ -148,7 +150,7 @@
                   </thead>
                   <tbody>
                   <?php $date=date('Y-m').'-01'; $date2=date('Y-m').'-31';
-                  $stmt = $db->query("SELECT  SUM(amount), person, COUNT(amount) FROM sales WHERE date BETWEEN '$date' AND '$date2' GROUP BY person ORDER BY SUM(amount) DESC LIMIT 5");
+                  $stmt = $db->query("SELECT  SUM(amount), person, COUNT(amount) FROM sales WHERE date BETWEEN '$date' AND '$date2' GROUP BY person ORDER BY SUM(amount) DESC LIMIT 7");
                   while ($row2 = $stmt->fetch()){ $em_code=$row2['person'];?>
                   <tr>
                     <td>
@@ -166,8 +168,60 @@
                 </table>
               </div>
             </div>
-    </div>
+      </div>
+      <div class=" col-md-7">
+                  <!-- solid sales graph -->
+                  <div class="card bg-gradient-info">
+              <div class="card-header border-0">
+                <h3 class="card-title">
+                  <i class="fas fa-th mr-1"></i>
+                  Sales Graph
+                </h3>
 
+                <div class="card-tools">
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Mail-Orders</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Online</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">In-Store</div>
+                  </div>
+                  <!-- ./col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </div>
+    </div>
           <div class="card">
               <div class="card-header border-transparent">
                 <h3 class="card-title">TOP 10 SALES</h3>
@@ -387,6 +441,76 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $(function () {
+
+      // Sales graph chart
+  var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')
+  // $('#revenue-chart').get(0).getContext('2d');
+
+  var salesGraphChartData = {
+    labels: [<?php 
+    $y=date('Y')-1;
+    $m=date('m');
+
+    $da=$y."-".$m;
+          $stmt = $db->query("SELECT  month FROM month_avg WHERE month > '$da' GROUP BY month ORDER BY month ASC LIMIT 12");
+                    while ($row2 = $stmt->fetch()){  echo "'".$row2['month']."',"; }?>],
+    datasets: [
+      {
+        label: 'Digital Goods',
+        fill: false,
+        borderWidth: 2,
+        lineTension: 0,
+        spanGaps: true,
+        borderColor: '#efefef',
+        pointRadius: 3,
+        pointHoverRadius: 7,
+        pointColor: '#efefef',
+        pointBackgroundColor: '#efefef',
+        data: [<?php 
+          $stmt = $db->query("SELECT  SUM(amount) FROM month_avg WHERE month > '$da' GROUP BY month ORDER BY month ASC LIMIT 12");
+                    while ($row2 = $stmt->fetch()){  echo $row2['SUM(amount)'].","; }?>]
+      }
+    ]
+  }
+
+  var salesGraphChartOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontColor: '#efefef'
+        },
+        gridLines: {
+          display: false,
+          color: '#efefef',
+          drawBorder: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          stepSize: 5000,
+          fontColor: '#efefef'
+        },
+        gridLines: {
+          display: true,
+          color: '#efefef',
+          drawBorder: false
+        }
+      }]
+    }
+  }
+
+  // This will get the first returned node in the jQuery collection.
+  // eslint-disable-next-line no-unused-vars
+  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'line',
+    data: salesGraphChartData,
+    options: salesGraphChartOptions
+  })
     /* ChartJS
      * -------
      * Here we will create a few charts using ChartJS
