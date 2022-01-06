@@ -79,7 +79,8 @@
                     <td><?PHP if($row2['action']==0){echo "<b style='color:#EACA00;'>Waiting for Approval</b>";} if($row2['action']==1){echo "<b style='color:#2ECC71;'>Approve</b>";} ?></td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<?php echo $row2['id'] ?>">
                   VIew
-                </button></td>
+                </button>
+                <a class="btn btn-success btn-md delbutton" href="order_print.php?id=<?php echo $row2['id']; ?>">Print <i class="fas fa-print"></i></a></td>
                     
                     </tr>
       
