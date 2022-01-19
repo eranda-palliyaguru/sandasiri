@@ -32,6 +32,40 @@
     <!-- Content Header (Page header) -->
  <!-- Main content -->
  <section class="content">
+
+ <div class="container-fluid">
+        <div class="row">
+
+          <div class="modal fade" id="modal-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">BULK</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+<form action="save_bulk.php" method="post">
+<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+<input type="text" name="qty" class="form-control">
+<input type="hidden" name="sub" value="set">
+<input type="submit" class="btn btn-primary btn-sm" value="Save">
+</form>
+                <p> </p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
       <div class="container-fluid">
           <br>
         <div class="row">
@@ -42,7 +76,7 @@
               <div class="card-body box-profile">
 
 <?php $id=$_GET['id'];
-$stmt = $db->query("SELECT  * FROM item WHERE id = '$id'  ");
+                $stmt = $db->query("SELECT  * FROM item WHERE id = '$id'  ");
                     while ($row2 = $stmt->fetch()){ ?>
                 <h3 class="profile-username text-center"><?php echo $row2['name']; ?></h3>
 
@@ -60,10 +94,12 @@ $stmt = $db->query("SELECT  * FROM item WHERE id = '$id'  ");
                   </li>
                   <li class="list-group-item">
                     <b>QUANTITY</b> <a class="float-right"><?php echo $row2['qty']; ?></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>BULK QTY</b> <a class="float-right"><?php echo $row2['bulk']; ?></a>  <a href="#" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#modal-1">Change</a>
+                  </li>
                 </ul>
-<?php $code=$row2['sys_id']; $group_id=$row2['main_group'];$sub_group_id=$row2['sub_group']; } ?>
-               
-             
+                    <?php $code=$row2['sys_id']; $group_id=$row2['main_group'];$sub_group_id=$row2['sub_group']; } ?>            
               </div>
               <!-- /.card-body -->
             </div>
