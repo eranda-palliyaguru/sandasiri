@@ -119,7 +119,7 @@
               <th>id</th>
               <th>Name</th>
               <th>Code</th>
-              <th>Stock QTY</th>
+              <th>Stock</th>
               <th>Order QTY</th>
               <th>Stock Level</th>
               <th>Decision</th>
@@ -134,12 +134,21 @@
 ?>
                     <tr class='record' >
                     <td><?php echo $row['id'] ?></td>
-                    <td><?php echo $row['name'] ?></td>
+                    <td><?php echo $row['name']; ?> [<?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?>]</td>
                     <td><?php echo $row['code'] ?></td>
                     <td><?php echo $row['stock_qty'] ?></td>
                     <td><?php echo $row['qty'] ?></td>
                     <td><?php echo $row['stock_level'] ?></td>
-                    <td><?php if($disi > 0){echo "<b style='color:#1D8348 ;'>GOOD</b>";}else{echo "<b style='color:red;'>Bad</b>";} ?></td>
+                    <td><?php if($row2['action']=='0'){ ?>
+                      <form action="save_edit_order.php" method="post"> 
+                      <input type="hidden" name="id" value="<?php echo $row['id'] ?>" >
+                        <input style="width:50px;" type="text" name="qty" >
+                        <select name="type" id=""> 
+                          <option value="1">Hivalue</option> 
+                        </select> 
+                        <input class="btn btn-info btn-md delbutton" type="submit" value="Save"> 
+                      </form><?php } ?>
+                    </td>
                     <td><?php if( $row['action'] == 0){ ?><a class="btn btn-danger btn-md delbutton" href="order_list_dll.php?id=<?php echo $row['id']; ?>&ord=<?php echo $id; ?>&dip=order.php"><i class="fas fa-trash-alt"></i></a>
                     <?php } ?> </td>
                     </tr>
